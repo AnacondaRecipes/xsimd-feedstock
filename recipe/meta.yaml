@@ -1,6 +1,6 @@
 {% set name = "xsimd" %}
-{% set version = "11.0.0" %}
-{% set sha256 = "50c31c319c8b36c8946eb954c7cca2e2ece86bf8a66a7ebf321b24cd273e7c47" %}
+{% set version = "7.4.4" %}
+{% set sha256 = "a60d49f638b68117ae5aea73cf2d5586f4afda4de2435962de4310b11214de6a" %}
 
 package:
   name: {{ name|lower }}
@@ -9,8 +9,6 @@ package:
 source:
   url: https://github.com/xtensor-stack/xsimd/archive/{{ version }}.tar.gz
   sha256: {{ sha256 }}
-  patches:
-    - patches/cpp11_compatibility.patch
 
 build:
   number: 0
@@ -20,8 +18,6 @@ requirements:
     - {{ compiler('cxx') }}
     - cmake
     - make      # [unix]
-    - patch     # [unix]
-    - m2-patch  # [win]
 
 test:
   commands:
