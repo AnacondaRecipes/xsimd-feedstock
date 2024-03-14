@@ -1,0 +1,49 @@
+From a48ab430d4b84ecd5449180ee1c6d2eed67c4191 Mon Sep 17 00:00:00 2001
+From: barracuda156 <vital.had@gmail.com>
+Date: Wed, 20 Dec 2023 22:23:22 +0800
+Subject: [PATCH] xsimd_scalar.hpp: fix for missing exp10 on macOS < 10.9
+
+---
+ include/xsimd/arch/xsimd_scalar.hpp | 15 ++++++++++++++-
+ 1 file changed, 14 insertions(+), 1 deletion(-)
+
+diff --git a/include/xsimd/arch/xsimd_scalar.hpp b/include/xsimd/arch/xsimd_scalar.hpp
+index 9066da656..39bd607be 100644
+--- a/include/xsimd/arch/xsimd_scalar.hpp
++++ b/include/xsimd/arch/xsimd_scalar.hpp
+@@ -24,6 +24,10 @@
+ #include "xtl/xcomplex.hpp"
+ #endif
+ 
++#ifdef __APPLE__
++#include <AvailabilityMacros.h>
++#endif
++
+ namespace xsimd
+ {
+     template <class T, class A>
+@@ -502,7 +506,7 @@ namespace xsimd
+         return !(x0 == x1);
+     }
+ 
+-#if defined(__APPLE__)
++#if defined(__APPLE__) && (MAC_OS_X_VERSION_MIN_REQUIRED > 1080)
+     inline float exp10(const float& x) noexcept
+     {
+         return __exp10f(x);
+@@ -520,6 +524,15 @@ namespace xsimd
+     {
+         return ::exp10(x);
+     }
++#elif !defined(__clang__) && defined(__GNUC__) && (__GNUC__ >= 5)
++    inline float exp10(const float& x) noexcept
++    {
++        return __builtin_exp10f(x);
++    }
++    inline double exp10(const double& x) noexcept
++    {
++        return __builtin_exp10(x);
++    }
+ #elif defined(_WIN32)
+     template <class T, class = typename std::enable_if<std::is_scalar<T>::value>::type>
+     inline T exp10(const T& x) noexcept
