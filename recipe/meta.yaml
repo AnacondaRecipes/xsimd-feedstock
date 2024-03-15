@@ -10,7 +10,7 @@ source:
   url: https://github.com/xtensor-stack/xsimd/archive/{{ version }}.tar.gz
   sha256: {{ sha256 }}
   patches:
-    - patches/fix-for-missing-exp10-on-macOS<10.9.patch
+    - patches/fix-for-missing-exp10-on-macOS-lt-10.9.patch
 
 build:
   number: 0
