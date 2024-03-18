@@ -1,6 +1,6 @@
 {% set name = "xsimd" %}
-{% set version = "11.0.0" %}
-{% set sha256 = "50c31c319c8b36c8946eb954c7cca2e2ece86bf8a66a7ebf321b24cd273e7c47" %}
+{% set version = "12.1.1" %}
+{% set sha256 = "73f94a051278ef3da4533b691d31244d12074d5d71107473a9fd8d7be15f0110" %}
 
 package:
   name: {{ name|lower }}
@@ -10,7 +10,7 @@ source:
   url: https://github.com/xtensor-stack/xsimd/archive/{{ version }}.tar.gz
   sha256: {{ sha256 }}
   patches:
-    - patches/cpp11_compatibility.patch
+    - patches/fix-for-missing-exp10-on-macOS-lt-10.9.patch
 
 build:
   number: 0
