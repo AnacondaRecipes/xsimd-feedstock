@@ -12,7 +12,8 @@ source:
 build:
   number: 0
   script:
-    - cmake -G "Ninja" -B build/ -D BUILD_TESTS=OFF ${{ "%CMAKE_ARGS%" if win else "${CMAKE_ARGS}" }}
+    - cmake -G "Ninja" -B build/ -D BUILD_TESTS=OFF ${CMAKE_ARGS}  # [unix]
+    - cmake -G "Ninja" -B build/ -D BUILD_TESTS=OFF %CMAKE_ARGS%  # [win]
     - cmake --build build/
     - cmake --install build/
 
