@@ -26,12 +26,16 @@ requirements:
 
 test:
   commands:
-    - test -f ${PREFIX}/include/xsimd/xsimd.hpp                       # [unix]
-    - test -f ${PREFIX}/lib/cmake/xsimd/xsimdConfig.cmake             # [unix]
-    - test -f ${PREFIX}/lib/cmake/xsimd/xsimdConfigVersion.cmake      # [unix]
-    - if not exist %LIBRARY_PREFIX%\include\xsimd\xsimd.hpp (exit 1)                   # [win]
-    - if not exist %LIBRARY_PREFIX%\lib\cmake\xsimd\xsimdConfig.cmake (exit 1)         # [win]
-    - if not exist %LIBRARY_PREFIX%\lib\cmake\xsimd\xsimdConfigVersion.cmake (exit 1)  # [win]
+    - test -f ${PREFIX}/include/xsimd/xsimd.hpp  # [unix]
+    - test -f ${PREFIX}/share/cmake/xsimd/xsimdConfig.cmake  # [unix]
+    - test -f ${PREFIX}/share/cmake/xsimd/xsimdConfigVersion.cmake  # [unix]
+    - test -f ${PREFIX}/share/cmake/xsimd/xsimdTargets.cmake  # [unix]
+    - test -f ${PREFIX}/share/pkgconfig/xsimd.pc  # [unix]
+    - if not exist %LIBRARY_PREFIX%\include/xsimd/xsimd.hpp (exit 1)  # [win]
+    - if not exist %LIBRARY_PREFIX%\share/cmake/xsimd/xsimdConfig.cmake (exit 1)  # [win]
+    - if not exist %LIBRARY_PREFIX%\share/cmake/xsimd/xsimdConfigVersion.cmake (exit 1)  # [win]
+    - if not exist %LIBRARY_PREFIX%\share/cmake/xsimd/xsimdTargets.cmake (exit 1)  # [win]
+    - if not exist %LIBRARY_PREFIX%\share/pkgconfig/xsimd.pc (exit 1)  # [win]
 
 about:
   home: https://github.com/xtensor-stack/xsimd
